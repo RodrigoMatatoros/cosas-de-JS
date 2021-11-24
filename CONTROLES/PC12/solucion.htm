@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>EJC12</title>
+
+<script>
+var cid=0; // contador de cajas
+
+function iniciar(){
+		unaCaja();			
+}
+function unaCaja(){
+	if (cid==32){alert('-COMPLETO-');return}
+	var txt='c<b>'+String(cid+1).padStart(2,0)+'</b>';
+	var ele=crearCelda(60,60,txt);
+	ele.style.backgroundColor=ponColor();
+	cid++;
+	if (cid%8==0){crearSalto();}
+}
+function crearSalto(height){
+	creaDiv().style.clear='left'; // css posicionamiento
+}
+function crearCelda(width,height,id){
+	var ele=creaDiv(); // crear nodo div
+	ele.id=id;
+	ele.innerHTML=id;
+	ele.style.textAlign='center'; // centrar texto del innerHTML
+	ele.style.cssFloat='left'; // posicionamiento
+	ele.style.width=width+'px';
+	ele.style.height=height+'px';
+	ele.style.margin='8px';
+	ele.style.border='1px solid black'
+	ele.addEventListener('click',clickCaja); // evento click
+	return ele;
+}
+function creaDiv(){
+	var ele=document.createElement('div'); // crear nodo
+	document.body.appendChild(ele);	// añadir nodo al dom
+	return ele;
+}
+function clickCaja(){
+	unaCaja();
+}
+function ponColor(ele){
+	var r=aleatorio(0,255).toString(16).padStart(2,0); 
+	var g=aleatorio(0,255).toString(16).padStart(2,0);
+	var b=aleatorio(0,255).toString(16).padStart(2,0);
+	return '#'+r+g+b;
+}
+function aleatorio(a,b) {
+	return Math.round(Math.random()*(b-a)+parseInt(a));
+}
+window.onload = iniciar; 
+</script>
+
+</head>
+ 
+<body>
+</body>
+
+</html>

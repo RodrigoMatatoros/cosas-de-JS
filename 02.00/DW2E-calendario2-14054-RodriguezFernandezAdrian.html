@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tablero1</title>
+
+    <style>
+        .label {
+            margin-right: 10px;
+        }
+        
+        .mes {
+            background-color: yellow;
+        }
+        
+        .mes:hover {
+            border: 1px solid red;
+            cursor: pointer;
+        }
+        
+        .noMes {
+            background-color: khaki;
+        }
+        
+        .festivo {
+            color: red;
+        }
+        
+        .marcado {
+            border: 1px solid black;
+        }
+    </style>
+
+    <script>
+        const ano = 2020;
+        const dias = ["D", "L", "M", "X", "J", "V", "S"];
+        const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        var diasList = [];
+
+        function iniciar() {
+
+
+            for (let t = 2019; t <= 2029; t++) {
+                crearCalendario(t);
+            }
+
+        }
+
+        function crearCalendario(anoFinal) {
+            var f = new Date(anoFinal, 0);
+            creaTitulo('h1', "Año " + anoFinal);
+
+            for (let i = 0; i < 12; i++) {
+                var dia = f.setDate(1);
+                var mesActual = f.setMonth(i);
+
+                creaTitulo('div', meses[f.getMonth()]);
+
+                var cont = f.getDay() + 6;
+                var mes = f.getMonth();
+
+                dia = f.setDate(f.getDate() - cont);
+
+                for (let j = 0; j < 49; j++) {
+
+                    if (mes != f.getMonth()) {
+                        crearDia('div', f.getDate() + "</br>" + dias[f.getDay()], "noMes", f);
+
+                    } else {
+                        crearDia('div', f.getDate() + "</br>" + dias[f.getDay()], "mes", f);
+                    }
+
+                    dia = f.setDate(f.getDate() + 1);
+
+                }
+            }
+        }
+
+        function crearDia(tipo, inner, clase, f) {
+            var ele = document.createElement(tipo);
+            document.body.appendChild(ele);
+            ele.style.float = "left";
+            ele.style.margin = "1px";
+            ele.style.width = "17px";
+            ele.style.textAlign = "right";
+            ele.style.textAlign = "center";
+            ele.classList.add(clase);
+            ele.innerHTML = inner;
+            ele.addEventListener('click', agenda);
+            ele.id = f.getTime();
+
+            diasList.push({
+                id: f.getTime(),
+                mensaje: "Introduce mensaje"
+            });
+
+
+            if (dias[f.getDay()] == "S" || dias[f.getDay()] == "D") {
+                ele.classList.add("festivo");
+            }
+        }
+
+        function agenda() {
+            var id = this.id;
+            console.log(id);
+            var text = "";
+            for (let dia of diasList) {
+                if (id == dia.id) {
+                    var textoPront = dia.mensaje;
+                    text = prompt(textoPront, textoPront);
+                    dia.mensaje = text;
+
+
+                    if (dia.mensaje != "Introduce mensaje") {
+                        var ele = document.getElementById(this.id);
+                        ele.classList.add("marcado");
+                    }
+
+                    if (dia.mensaje == null) {
+                        dia.mensaje = textoPront;
+                    }
+
+                    if (dia.mensaje == "") {
+                        dia.mensaje = "Introduce mensaje";
+                        ele.classList.remove("marcado");
+                    }
+
+                }
+            }
+
+        }
+
+        function creaTitulo(tipo, inner) {
+            var ele = document.createElement(tipo); // crear nodo
+            document.body.appendChild(ele); // posicionarlo en el DOM 
+            ele.style.float = "left";
+            ele.style.clear = "left";
+            ele.style.width = "150px";
+            ele.style.fontSize = "30px";
+            ele.style.textAlign = "right";
+            ele.innerHTML = inner;
+            ele.classList.add("label");
+
+            return ele; // lo retornamos para trabajar con el
+        }
+
+        window.onload = iniciar; // sin parentesis , al final del head
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

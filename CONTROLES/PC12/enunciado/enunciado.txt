@@ -1,0 +1,29 @@
+nombre: DW2E-PC12-expediente-ApellidoNombre.htm
+tiempo: 50 minutos
+acceso a internet: si
+
+Criterios de evaluación ==
+- El nombre del fichero es el indicado arriba
+- Solo se evaluan los ficheros con el nombre totalmente correcto sino es un cero.
+- Subir a la carpeta de clase, se pueden hacer multiples entregas, se evalua la ultima dentro del tiempo. Sino se sube nada es un cero. Si solo se sube fuera de tiempo es un cero.
+- Leer este enunciado detenidamente. Durante el examen no hay preguntas.
+
+Apartados:
+
+A) Pagina inicial ( 1 punto )
+- una caja de 60x60 pixel
+- color al azar en cada recarga
+- texto de la caja en contenido y formato
+
+B) Desarrollo (1 punto)
+- un click en la primera caja crea otra igual salvo el color
+- un click en cualquier caja crea otra igual salvo el color
+- color al azar en cada caja nueva creada
+- numeros consecutivos en los textos de las cajas
+- filas de 8 cajas
+
+C) Final (1 punto)
+- despues de mostrar 32 cajas, un click muestra un mensaje
+- el mensaje es -COMPLETO- tal cual aparece en la captura
+- click sucesivos vuelven a poner el mismo mensaje
+- click sucesivos mantienen las 32 cajas mostradas

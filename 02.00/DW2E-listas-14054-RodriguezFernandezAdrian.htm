@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Listas</title>
+
+    <script>
+        function iniciar() {
+
+
+
+            var arr = [];
+
+            for (let i = 0; i < 10; i++) {
+                arr.push(numAleatorio());
+            }
+
+            // - Lista
+            document.write("lista: " + arr + "<br/>");
+
+            // - En orden ascendnte
+            var arrOrden = arr.sort();
+            document.write("ascendente: " + arrOrden + "<br/>");
+
+            // - En orden descendente
+            var arrOrdenInv = arrOrden.reverse();
+            document.write("descendente: " + arrOrdenInv + "<br/>");
+
+
+
+            // - Calcula la media
+            var total = arr.length;
+            var suma = 0;
+
+            for (let num of arr) {
+                suma += num;
+            }
+
+            var media = suma / total;
+            document.write("Media: " + media + "<br/>");
+
+
+            // - Calcula la suma
+            document.write("Suma: " + suma + "<br/>");
+
+            // - Calcula el maximo
+            arr.sort(function(a, b) {
+                return a - b
+            });
+
+            document.write("maximo sort: " + arr[arr.length - 1] + "<br/>");
+
+            document.write("max apply: " + Math.max.apply(null, arr) + "<br/>");
+
+
+            // - Calcula el minimo
+            document.write("minimo sort: " + arr[0] + "<br/>");
+
+            document.write("min apply: " + Math.min.apply(null, arr) + "<br/>");
+
+            // - Filtra los numeros entre 0 y 100
+            var arrEntreDosNum = []
+
+            arr.forEach(num => {
+                if (num >= 0 && num <= 100) {
+                    arrEntreDosNum.push(num);
+                }
+            });
+
+            document.write("filtra entre 0 y 100: " + arrEntreDosNum + "<br/>");
+
+        }
+
+        function numAleatorio() {
+            return Math.round(Math.random() * (1000));
+        }
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

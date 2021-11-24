@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>entero</title>
+
+
+    <script>
+        function iniciar() {
+
+            crearTextArea();
+            crearZonaAviso();
+        }
+
+
+
+        function crearTextArea(lista) {
+
+            for (let i = 1; i < 5; i++) {
+                var textarea = document.createElement('textarea');
+                textarea.cols = "4";
+                textarea.maxLength = "4";
+                textarea.rows = "1";
+                textarea.style.resize = "none";
+                textarea.id = "caja" + i;
+                document.body.appendChild(textarea);
+                textarea.addEventListener('change', calcular);
+            }
+
+
+        }
+
+        function crearZonaAviso() {
+            var aviso = document.createElement('p');
+            document.body.appendChild(aviso);
+            aviso.id = "aviso";
+        }
+
+
+        function calcular() {
+
+            var textoAviso = "";
+
+            var filtro = true;
+            var rellenos = true;
+            var entero = true;
+            var valores = [];
+
+            for (let j = 1; j < 5; j++) {
+                var caja = document.getElementById("caja" + j);
+                var num = caja.value;
+                if (num > 20 || num < 2) {
+                    filtro = false;
+                }
+
+                if (num == "") {
+                    rellenos = false;
+                }
+
+                if (num % 1 != 0) {
+                    entero = false;
+                }
+
+                valores.push(num);
+
+            }
+
+            if (!filtro) {
+                textoAviso += "Números entre 2 y 20<br/>";
+            }
+
+            if (!rellenos) {
+                textoAviso += "Campos no rellenos<br/>";
+            }
+
+            if (!entero) {
+                textoAviso += "Números no enteros<br/>";
+            }
+
+            if (entero && rellenos && filtro) {
+                textoAviso = "Valores ordenados ascendientemente: " + valores.sort().join() + "<br/> Valores ordenados descendientemente: " + valores.sort().reverse().join();
+            }
+
+            aviso.innerHTML = textoAviso;
+
+        }
+
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

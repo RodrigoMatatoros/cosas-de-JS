@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Listas3</title>
+
+    <script>
+        function iniciar() {
+
+            var lista = [];
+
+            crearObjeto(lista);
+
+            dibujarLista(lista, 'Listado (texto: nivel y version)');
+
+
+            lista.sort(function(a, b) {
+                return a.version - b.version
+            });
+            dibujarLista(lista, 'Listado (texto: nivel y version)');
+
+
+            var listaFiltro = lista.filter(function(a, b) {
+
+                return a.version >= 1 && a.version <= 5;
+            });
+
+            dibujarLista(listaFiltro, 'Listado (Filtro)');
+
+
+        }
+
+        function creaContenedor(tipo, id, iner, altura) {
+            var ele = document.createElement(tipo); // crear nodo
+            document.body.appendChild(ele); // posicionarlo en el DOM 
+            ele.id = id;
+            ele.innerHTML = iner;
+            ele.style.height = altura + "px";
+            ele.style.border = '1px solid #000'
+            ele.style.margin = "10px 0px";
+
+
+            return ele; // lo retornamos para trabajar con el
+        }
+
+        function creaNodo(tipo, id, obj, cont) {
+            var ele = document.createElement(tipo); // crear nodo
+            var iner = obj.texto + ":" + obj.nivel + "<br/>" + obj.version;
+            cont.appendChild(ele); // posicionarlo en el DOM 
+            ele.id = id;
+            ele.innerHTML = iner;
+
+
+            ele.style.backgroundColor = obj.color;
+            ele.style.width = obj.ancho;
+            ele.style.height = obj.alto;
+            ele.style.border = '1px solid #000';
+            ele.style.margin = '2px';
+            ele.style.cursor = 'pointer';
+            ele.style.textAlign = "center";
+            ele.style.float = 'left';
+
+            return ele; // lo retornamos para trabajar con el
+        }
+
+        function crearObjeto(lista) {
+            for (let i = 0; i < 10; i++) {
+
+                var obj = {
+                    alto: alto(),
+                    ancho: ancho(),
+                    color: aleatorioColor(),
+                    nivel: nivel(),
+                    texto: texto(),
+                    version: version()
+                }
+
+                lista.push(obj);
+            }
+        }
+
+        function dibujarLista(lista, label) {
+            var titulo = creaContenedor('div', 'contenedor1', label, 20);
+            var contenedor = creaContenedor('div', 'contenedor1', '', '100');
+
+            lista.forEach(obj => {
+
+                var ele = creaNodo('div', 'contenedor', obj, contenedor);
+
+            });
+        }
+
+        function numAleatorio(max, min) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+
+        function alto() {
+
+            var num = numAleatorio(1, 3);
+            if (num == 1) {
+                return "50px";
+            }
+            if (num == 2) {
+                return "70px";
+            } else {
+                return "90px";
+            }
+        }
+
+        function ancho() {
+
+            var num = numAleatorio(1, 2);
+
+            if (num == 1) {
+                return "40px";
+            } else {
+                return "60px";
+            }
+        }
+
+        function aleatorioColor() {
+
+
+            var red = Math.round(Math.random() * (255 - 250) + 250);
+            var green = Math.round(Math.random() * (255));
+            var blue = Math.round(Math.random() * (255));
+
+            var color = "rgb(" + red + "," + green + "," + blue + ")";
+            return color;
+        }
+
+        function nivel() {
+
+            var num = numAleatorio(1, 3);
+            if (num == 1) {
+                return "A";
+            }
+            if (num == 2) {
+                return "B";
+            } else {
+                return "C";
+            }
+        }
+
+        function texto() {
+
+            var cad = "ABCDEFGHIJKL";
+            var num = numAleatorio(0, 11);
+            return cad[num];
+        }
+
+        function version() {
+
+            return numAleatorio(0, 9);
+        }
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DNI</title>
+
+    <script>
+        function iniciar() {
+
+            try {
+
+                var numero = prompt("Insertar DNI sin letra:");
+                var numeroControl = numero.match(/^[0-9]{1,8}$/);
+
+                if (numeroControl == null) {
+                    throw "Número de DNI incorrecto.";
+                }
+
+                var letra = prompt("Insertar letra DNI").toUpperCase();
+                var letraControl = letra.match(/^[A-Z]$/);
+
+                if (letraControl == null) {
+                    throw "Letra incorrecta.";
+                }
+
+                var resultado = averigua(numero, letra);
+
+                alert(resultado);
+
+            } catch (error) {
+                creaNodo('p', "resultado", error);
+            }
+
+        }
+
+
+        function averigua(numero, letra) {
+            var cadena = "TRWAGMYFPDXBNJZSQVHLCKET"
+            var letraBuena = numero % 23;
+
+            if (cadena[letraBuena] == letra) {
+                return "Coindide: " + numero + " - " + letra;
+            } else {
+                return "No Coindide: " + numero + " - " + letra;
+            }
+        }
+
+        function creaNodo(tipo, id, inner) {
+            var ele = document.createElement(tipo);
+            document.body.appendChild(ele);
+            ele.id = id;
+            ele.innerHTML = inner;
+            return ele;
+        }
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

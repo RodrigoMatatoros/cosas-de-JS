@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Listas2</title>
+
+    <script>
+        function iniciar() {
+
+
+            var lista = [];
+
+
+            for (let i = 0; i < 10; i++) {
+                lista.push(crearObjeto());
+            }
+
+
+            document.write("Primer objeto de la lista = ")
+            for (let obj in lista[0]) {
+                document.write(obj + ":" + lista[0][obj] + ",");
+            }
+
+            document.write("<br>trabajar con el atributo <b>version</b><br/>")
+
+            var listaVersion = [];
+
+            for (let obj of lista) {
+                listaVersion.push(obj.version);
+            }
+
+            // - Lista
+            document.write("lista: " + listaVersion + "<br/>");
+
+
+            // - En orden ascendnte
+            var listaOrden = listaVersion.sort();
+            document.write("ascendiente: " + listaOrden + "<br/>");
+
+            // - En orden descendente
+            var listaOrdenInv = listaOrden.reverse();
+            document.write("descendiente: " + listaOrdenInv + "<br/>");
+
+            // - Filtra los numeros entre 0 y 100
+            var listaEntreDosNum = []
+
+            listaVersion.forEach(num => {
+                if (num >= 0 && num <= 100) {
+                    listaEntreDosNum.push(num);
+                }
+            });
+
+            // - Calcula la media
+            var total = listaVersion.length;
+            var suma = 0;
+
+            for (let num of listaVersion) {
+                suma += num;
+            }
+
+            var media = suma / total;
+            document.write("media: " + media + "<br/>");
+
+
+
+
+            // - Calcula el maximo
+            listaVersion.sort(function(a, b) {
+                return a - b
+            });
+            document.write("maximo: " + listaVersion[listaVersion.length - 1] + "<br/>");
+
+            // - Calcula el minimo
+            document.write("minimo: " + listaVersion[0] + "<br/>");
+
+
+            // - Calcula la suma
+            document.write("suma: " + suma + "<br/>");
+
+            // - Filtra los numeros entre 0 y 100
+            var arrEntreDosNum = []
+
+            listaVersion.forEach(num => {
+                if (num >= 0 && num <= 5) {
+                    arrEntreDosNum.push(num);
+                }
+            });
+
+            document.write("filtra (0,5): " + arrEntreDosNum + "<br/>");
+
+        }
+
+        function crearObjeto() {
+            return {
+                color: "#123123",
+                texto: "hola",
+                nivel: "A",
+                version: numAleatorio()
+            }
+        }
+
+        function numAleatorio() {
+            return Math.round(Math.random() * (9));
+        }
+
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

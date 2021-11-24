@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>menu1</title>
+
+    <script>
+        const n = 20;
+
+        const texto = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.";
+
+        function iniciar() {
+
+            for (let i = 0; i < n; i++) {
+
+                var ele = creaNodo('div', 'caja' + (i + 1), 'Menu' + (i + 1));
+                ele.style.border = '1px solid #000';
+                ele.style.float = 'left';
+                ele.style.margin = '5px';
+                ele.style.cursor = 'pointer';
+                ele.addEventListener("mouseover", sobreCaja);
+                ele.addEventListener("mouseout", sobreCajaOff);
+                ele.addEventListener('click', clickCaja);
+            }
+
+            var parrafo = creaNodo('p', 'parrafo', '<br>Instrucciones: pulsa alguna opción del menú superior');
+            parrafo.style.clear = "left";
+        }
+
+        function clickCaja() {
+            var parrafo = document.getElementById('parrafo');
+            parrafo.innerHTML = "<br><b>" + this.innerHTML + "</b><br>" + textoRandom();
+        }
+
+        function sobreCaja() {
+            this.style.backgroundColor = 'grey';
+        }
+
+        function sobreCajaOff() {
+            this.style.backgroundColor = 'white';
+        }
+
+        function creaNodo(tipo, id, inner) {
+            var ele = document.createElement(tipo); // crear nodo
+            document.body.appendChild(ele); // posicionarlo en el DOM 
+            ele.id = id;
+            ele.innerHTML = inner;
+            return ele; // lo retornamos para trabajar con el
+        }
+
+        function textoRandom() {
+            var num = Math.round(Math.random() * (20 - 0) + (0));
+
+            return texto.substr(num, 240);
+        }
+
+        window.onload = iniciar; // sin parentesis , al final del head
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

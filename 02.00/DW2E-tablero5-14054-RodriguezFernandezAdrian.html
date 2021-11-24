@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tablero4</title>
+
+    <script>
+        const n = 64;
+
+        function iniciar() {
+
+
+            for (let i = 0; i < n; i++) {
+
+                var ele = creaNodo('div', 'caja' + (i + 1), '');
+                ele.style.backgroundColor = "black";
+                ele.style.width = '40px';
+                ele.style.height = '40px';
+                ele.style.border = '1px solid #000';
+                ele.style.margin = '2px';
+                ele.style.cursor = 'pointer';
+
+                ele.style.float = 'left';
+
+                if (i % 8 == 0) {
+                    ele.style.clear = 'left';
+                }
+
+
+                ele.addEventListener('click', clickCaja);
+
+            }
+        }
+
+
+
+        function clickCaja() {
+
+            for (let k = 0; k < n; k++) {
+                var caja = document.getElementById('caja' + (k + 1));
+                caja.style.backgroundColor = "black";
+            }
+
+            var j = parseInt(this.id.substr(4));
+            console.log(j);
+
+            while (j % 8 != 0) {
+                var caja = document.getElementById('caja' + (j + 1));
+                caja.style.backgroundColor = "white";
+                j++;
+
+            }
+
+            var j = parseInt(this.id.substr(4));
+
+            do {
+                var caja = document.getElementById('caja' + (j));
+                caja.style.backgroundColor = "white";
+                j--;
+            } while (j % 8 != 0);
+
+
+            var j = parseInt(this.id.substr(4));
+
+            while ((j) <= n) {
+                var caja = document.getElementById('caja' + (j));
+                caja.style.backgroundColor = "white";
+                j += 8;
+
+            }
+
+            var j = parseInt(this.id.substr(4));
+
+            while ((j) > 0) {
+                var caja = document.getElementById('caja' + (j));
+                caja.style.backgroundColor = "white";
+                j -= 8;
+
+            }
+
+
+            this.style.backgroundColor = "white";
+
+        }
+
+        function creaNodo(tipo, id, inner) {
+            var ele = document.createElement(tipo); // crear nodo
+            document.body.appendChild(ele); // posicionarlo en el DOM 
+            ele.id = id;
+            ele.innerHTML = inner;
+            return ele; // lo retornamos para trabajar con el
+        }
+
+
+
+        window.onload = iniciar; // sin parentesis , al final del head
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

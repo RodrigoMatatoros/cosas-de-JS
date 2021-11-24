@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Recorrer objetos</title>
+</head>
+<body>
+<script>
+
+// ver 20141210
+/*
+ejemplo de como recorrer un array asociativa y un objeto
+usando la estructura for..in
+*/
+
+// array asociativa
+var lista = [];
+lista['a']='aa';
+lista['b']='bb';
+lista['c']='cc';
+
+// objeto
+var obj = {'a':'aa','b':'bb','c':'cc'}
+
+// recorremos ambos de la misma forma usando for..in
+
+for(i in lista) {
+  console.log(i,' = ',lista[i]);
+}
+
+for(i in obj) {
+  console.log(i,' = ',obj[i]);
+}
+
+</script>
+</body>
+</html>
+

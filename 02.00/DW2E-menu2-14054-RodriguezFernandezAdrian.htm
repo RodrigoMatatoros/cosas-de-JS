@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>menu2</title>
+
+
+    <script>
+        var lista = crearLista();
+
+        function iniciar() {
+
+            imprimir();
+            crearIndice();
+            crearMenu();
+            crearReset();
+
+        }
+
+
+        function crearLista() {
+
+            var lista = [];
+
+            lista.push(crearObjeto("CODIGO", "NOMBRE", "ANCESTRO"));
+            lista.push(crearObjeto("A1", "america", "00"));
+            lista.push(crearObjeto("A2", "europa", "00"));
+            lista.push(crearObjeto("A3", "africa", "00"));
+            lista.push(crearObjeto("A4", "asia", "00"));
+            lista.push(crearObjeto("B1", "canada", "A1"));
+            lista.push(crearObjeto("B2", "eeuu", "A1"));
+            lista.push(crearObjeto("B3", "brasil", "A1"));
+            lista.push(crearObjeto("B4", "argentina", "A1"));
+            lista.push(crearObjeto("B5", "uruguay", "A1"));
+            lista.push(crearObjeto("B6", "chile", "A1"));
+            lista.push(crearObjeto("B7", "francia", "A2"));
+            lista.push(crearObjeto("B8", "italia", "A2"));
+            lista.push(crearObjeto("C1", "toronto", "B1"));
+            lista.push(crearObjeto("C2", "quebec", "B1"));
+            lista.push(crearObjeto("C3", "lyon", "B7"));
+            lista.push(crearObjeto("C4", "paris", "B7"));
+            lista.push(crearObjeto("C5", "bayona", "B7"));
+            lista.push(crearObjeto("C6", "nantes", "B7"));
+            lista.push(crearObjeto("C7", "toulouse", "B7"));
+            return lista;
+
+        }
+
+        function crearObjeto(codigo, nombre, ancestro) {
+            return {
+                codigo: codigo,
+                nombre: nombre,
+                ancestro: ancestro
+            };
+
+        }
+
+        function imprimir() {
+
+            var ele = document.createElement('p');
+            document.body.appendChild(ele);
+
+            var textoLista = "";
+
+            lista.forEach(obj => {
+                textoLista += obj.codigo + "#" + obj.nombre + "#" + obj.ancestro + "<br/>";
+            });
+
+            ele.innerHTML = textoLista;
+        }
+
+        function crearIndice(lista) {
+
+        }
+
+        function crearMenu() {
+
+            var indice = document.createElement('div');
+            indice.id = "indice";
+            document.body.appendChild(indice);
+            indice.style.border = "1px solid black";
+            indice.style.padding = "3px 15px";
+            indice.style.margin = "5px 0px";
+            indice.style.display = "inline-block";
+
+            var ele = document.createElement('div');
+            indice.appendChild(ele);
+            indice.innerHTML = "Home";
+
+
+
+            var cont = document.createElement('div');
+            cont.id = "indice";
+            document.body.appendChild(cont);
+            cont.style.border = "1px solid black";
+            cont.style.padding = "3px 15px";
+            cont.style.margin = "5px 10px";
+            cont.style.display = "inline-block";
+
+            var ele = document.createElement('div');
+            cont.appendChild(ele);
+            cont.addEventListener("mouseover", sobreCaja);
+            cont.addEventListener("mouseout", sobreCajaOff);
+            cont.addEventListener("click", reset);
+            cont.style.cursor = "pointer";
+            cont.innerHTML = "Reset";
+
+
+            var cont = document.createElement('div');
+            cont.id = "contenedor";
+            document.body.appendChild(cont);
+
+
+            for (let i = 1; i < lista.length; i++) {
+
+                var ele = document.createElement('div');
+                cont.appendChild(ele);
+                ele.innerHTML = lista[i].nombre;
+                ele.className = "cajaMenu";
+                ele.id = lista[i].codigo;
+                ele.style.float = "left";
+                ele.style.border = "1px solid black";
+                ele.style.padding = "3px 15px";
+                ele.style.cursor = "pointer";
+                ele.style.display = "none";
+
+                ele.addEventListener("mouseover", sobreCaja);
+                ele.addEventListener("mouseout", sobreCajaOff);
+                ele.addEventListener('click', clickCaja);
+
+
+                if (lista[i].ancestro == "00") {
+                    ele.style.display = "block";
+                }
+
+            }
+
+        }
+
+
+
+        function clickCaja() {
+
+            var nombre = this.innerHTML;
+            ocultar();
+            mostrar(nombre);
+
+        }
+
+        function reset() {
+            ocultar();
+            for (let caja of lista) {
+                if (caja.ancestro == 00) {
+                    var ele = document.getElementById(caja.codigo);
+                    ele.style.display = "block";
+                }
+            }
+
+            var ele = document.getElementById("indice");
+            ele.innerHTML = "Home";
+        }
+
+        function mostrar(nombre) {
+            var codigo = "";
+            var ancestro = "";
+            for (let caja of lista) {
+                if (caja.nombre == nombre) {
+                    var ele = document.getElementById(caja.codigo);
+                    codigo = caja.codigo;
+                    ancestro = caja.ancestro;
+                }
+            }
+
+            for (let caja of lista) {
+                if (caja.ancestro == codigo) {
+                    var ele = document.getElementById(caja.codigo);
+                    ele.style.display = "block";
+                }
+            }
+
+            var indice = document.getElementById("indice");
+            indice.innerHTML = indice.innerHTML + " > " + nombre;
+
+
+        }
+
+        function ocultar() {
+
+            var ele = document.getElementsByClassName("cajaMenu");
+            for (let caja of ele) {
+                caja.style.display = "none";
+            }
+
+
+        }
+
+        function sobreCaja() {
+            this.style.backgroundColor = 'grey';
+        }
+
+        function sobreCajaOff() {
+            this.style.backgroundColor = 'white';
+        }
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

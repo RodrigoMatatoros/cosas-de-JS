@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>PC12</title>
+
+    <script>
+        const n = 64;
+        var lista = [];
+
+        function iniciar() {
+
+            var ele = creaNodo('div', 'caja' + (lista.length + 1), nombre(lista));
+            lista.push(ele);
+        }
+
+        function nombre(lista) {
+            if (lista.length + 1 < 10) {
+                return 'c<b>0' + (parseInt(lista.length) + 1) + "</b>";
+            } else {
+                return 'c<b>' + (parseInt(lista.length) + 1) + "</b>";
+            }
+        }
+
+        function clickCaja() {
+            if (lista.length == 32) {
+                alert('-COMPLETO-');
+            } else {
+                var ele = creaNodo('div', 'caja' + (lista.length + 1), nombre(lista));
+                lista.push(ele);
+            }
+
+
+
+        }
+
+        function creaNodo(tipo, id, inner) {
+            var ele = document.createElement(tipo); // crear nodo
+            document.body.appendChild(ele); // posicionarlo en el DOM 
+            ele.id = id;
+            ele.innerHTML = inner;
+            ele.style.backgroundColor = aleatorioColor();
+            ele.style.width = '60px';
+            ele.style.height = '60px';
+            ele.style.textAlign = "center";
+            ele.style.border = '1px solid #000';
+            ele.style.margin = '8px';
+            ele.style.cursor = 'pointer';
+            ele.addEventListener('click', clickCaja);
+            ele.style.float = 'left';
+
+            if (lista.length % 8 == 0) {
+                ele.style.clear = 'left';
+            }
+            return ele;
+        }
+
+        function aleatorioColor() {
+            var red = Math.round(Math.random() * (255));
+            var green = Math.round(Math.random() * (255));
+            var blue = Math.round(Math.random() * (255));
+
+            var color = "rgb(" + red + "," + green + "," + blue + ")";
+            return color;
+        }
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

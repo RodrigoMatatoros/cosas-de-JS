@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function inicio() {
+        crearSlider();
+        crearCajas();
+    }
+
+    function crearSlider() {
+        for (let i = 0; i < 3; i++) {
+            var sli = document.createElement("input");
+            document.body.appendChild(sli);
+            sli.setAttribute("type", "range");
+            sli.setAttribute("min", 0);
+            sli.setAttribute("max", 255);
+            sli.setAttribute("step", 1);
+            sli.addEventListener("change", loadDoc);
+        }
+    }
+
+    function crearCajas() {
+
+        document.body.appendChild(document.createElement("br"));
+
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.id = "r";
+        div.style.border = "1px solid black";
+        div.style.width = "165px";
+        div.style.height = "50px";
+        div.style.float = "left";
+        div.style.backgroundColor = "rgb(" + document.getElementsByTagName('input')[0].value + ", 0, 0)";
+
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.id = "g";
+        div.style.border = "1px solid black";
+        div.style.width = "165px";
+        div.style.height = "50px";
+        div.style.float = "left";
+        div.style.backgroundColor = "rgb(0," + document.getElementsByTagName('input')[1].value + ", 0)";
+
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.id = "b";
+        div.style.border = "1px solid black";
+        div.style.width = "165px";
+        div.style.height = "50px";
+        div.style.float = "left";
+        div.style.backgroundColor = "rgb(0,0," + document.getElementsByTagName('input')[2].value + ")";
+
+
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.id = "colorGlobal";
+        div.style.border = "1px solid black";
+        div.style.width = "498px";
+        div.style.height = "50px";
+        div.style.marginTop = "80px";
+
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        div.id = "codigo";
+        div.style.border = "1px solid black";
+        div.style.width = "165px";
+        div.style.height = "50px";
+        div.style.marginTop = "10px";
+    }
+
+    function loadDoc() {
+
+        var r = document.getElementsByTagName('input')[0].value;
+        var g = document.getElementsByTagName('input')[1].value;
+        var b = document.getElementsByTagName('input')[2].value;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                actualizarColores(this.responseText, r, g, b);
+            }
+        };
+        xhttp.open("GET", "DW2E-113-14054-RodriguezFernandezAdrian.php?r=" + r + "&g=" + g + "&b=" + b, true);
+        xhttp.send();
+    }
+
+    function actualizarColores(color, r, g, b) {
+        document.getElementById('colorGlobal').style.backgroundColor = color;
+        document.getElementById('r').style.backgroundColor = "rgb(" + r + ", 0, 0)";
+        document.getElementById('g').style.backgroundColor = "rgb(0, " + g + ", 0)";
+        document.getElementById('b').style.backgroundColor = "rgb(0, 0, " + b + ")";
+        document.getElementById('codigo').innerHTML = color;
+
+    }
+
+
+    window.onload = inicio;
+</script>
+
+<body>
+
+</body>
+
+</html>

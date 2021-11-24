@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+</head>
+ 
+<body>
+<script type="text/javascript">
+function aleatorio(a,b) {
+	return Math.round(Math.random()*(b-a)+parseInt(a));
+}	
+
+document.write('Manuel<br/>');
+document.write('<br/>');
+
+var dias=['lunes','martes','miercoles','jueves','viernes'];
+
+for (var j=0;j<dias.length;j++){
+document.write(dias[j]+' ');
+}
+document.write('<br/><br/>');
+
+var ingresos=[1,2,3,4,5,];
+var gastos=[5,4,3,2,1];
+
+var tg=0,ti=0,tb=0;
+for (var j=0;j<5;j++){
+	i=ingresos[j];
+	g=gastos[j];
+	b=i-g;
+	document.write(dias[j]+':'+i+'-'+g+'='+b+'#');
+	tg+=g;
+	ti+=i;
+	b=i-g;
+	tb+=b;
+}
+document.write('<br/>');
+var mi=ti/5;
+var mg=tg/5;
+var mb=tb/5;
+document.write('totales:'+ti+'#'+tg+'#'+tb+'<br/>');
+document.write('medias:'+mi+'#'+mg+'#'+mb+'<br/>');
+document.write('<br/>');
+
+var tg=0,ti=0,tb=0;
+for (var j=0;j<5;j++){
+	i=aleatorio(2,8);
+	g=aleatorio(2,8);
+	b=i-g;
+	document.write(dias[j]+':'+i+'-'+g+'='+b+'#');
+	tg+=g;
+	ti+=i;
+	b=i-g;
+	tb+=b;
+}	
+document.write('<br/>');
+mi=ti/5;
+mg=tg/5;
+mb=tb/5;
+document.write('totales:'+ti+'#'+tg+'#'+tb+'<br/>');
+document.write('medias:'+mi+'#'+mg+'#'+mb+'<br/>');
+document.write('<br/>');
+</script>	
+
+</body>
+</html>

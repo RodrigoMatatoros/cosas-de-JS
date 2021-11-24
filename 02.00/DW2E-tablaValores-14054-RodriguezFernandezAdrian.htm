@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Listas3</title>
+
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+    <script>
+        // 
+
+        function iniciar() {
+
+            var lista = [];
+            lista = crearLista(lista);
+            crearTabla(lista);
+            crearGrafico(lista);
+        }
+
+        function crearLista(lista) {
+
+            var titulo = document.createElement('p');
+            document.body.appendChild(titulo);
+            titulo.innerHTML = "<b>Ejemplo</b> de tabla de valores <br/>";
+
+            var textoCSV = document.createElement('p');
+            document.body.appendChild(textoCSV);
+            textoCSV.innerHTML = "1) texto csv <br/>x#cos(x)#seno(x)#seno(x)#14 decimales#x con decimales";
+
+            var lista = [];
+            var elemento = [];
+            var paso = 0.6;
+            var num = 0.0;
+
+            while (num <= 12) {
+                elemento.push(toDecimal(num, 2));
+                elemento.push(toDecimal(Math.cos(num), 2));
+                elemento.push(toDecimal(Math.sin(num), 2));
+                elemento.push(Math.sin(num));
+                elemento.push(toDecimal(num, 14));
+                elemento.push(num);
+
+                lista.push(elemento);
+                elemento = [];
+
+                num += paso;
+            }
+
+
+            var textoCSV = document.createElement('p');
+            document.body.appendChild(textoCSV);
+
+            var texto = '';
+
+            for (let i = 0; i < lista.length; i++) {
+                texto += lista[i].join("#") + "<br/>"
+            }
+            textoCSV.innerHTML = texto;
+
+            return lista;
+
+        }
+
+        function crearTabla(lista) {
+
+            var tabla = document.createElement('table');
+            tabla.id = "customers";
+            document.body.appendChild(tabla);
+
+            var tr = document.createElement('tr');
+            tabla.appendChild(tr);
+
+            var cabecera = ["x", "cos(x)", "seno(x)", "seno(x)", "14 decimales", "x con decimales"];
+
+            for (var tit of cabecera) {
+                var th = document.createElement('th');
+                tr.appendChild(th);
+                th.innerHTML = tit;
+            }
+
+            for (var elemento of lista) {
+                var tr = document.createElement('tr');
+                tabla.appendChild(tr);
+
+
+                for (let k = 0; k < elemento.length; k++) {
+                    var td = document.createElement('td');
+                    tr.appendChild(td);
+                    td.innerHTML = elemento[k];
+                }
+
+            }
+
+        }
+
+        function crearGrafico(lista) {
+
+            var texto = document.createElement('p');
+            document.body.appendChild(texto);
+            texto.innerHTML = "3) en un canvas:<br/>";
+
+            var canvas = document.createElement('canvas');
+            canvas.style.width = "500px";
+            canvas.style.height = "100px";
+            canvas.style.border = "1px solid #d3d3d3";
+            canvas.style.backgroundColor = "lightgrey";
+            canvas.id = "myCanvas";
+
+            document.body.appendChild(canvas);
+
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.beginPath();
+            ctx.strokeStyle = 'grey';
+
+            lista.forEach(valores => {
+                ctx.lineTo(valores[0] * 20, (valores[1] * 60) + 80);
+            });
+
+            ctx.stroke();
+
+        }
+
+
+
+        function toDecimal(num, dec) {
+            return parseFloat(num).toFixed(dec);
+        }
+
+
+        window.onload = iniciar;
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>
